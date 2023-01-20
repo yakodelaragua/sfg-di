@@ -3,11 +3,9 @@ package com.example.sfgdi.config;
 import com.example.sfgdi.repositories.EnglishGreetingRepository;
 import com.example.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import com.example.sfgdi.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
+@ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
     @Profile({"ES", "default"})
@@ -27,13 +25,14 @@ public class GreetingServiceConfig {
     }
     @Primary
     @Bean
-    PrimaryGreetingService greetingService(){
+    PrimaryGreetingService primaryGreetingService(){
         return new PrimaryGreetingService();
     }
-    @Bean
-    ConstructorGreetingService constructorGreetingService(){
-        return new ConstructorGreetingService();
-    }
+
+    //@Bean
+    //ConstructorGreetingService constructorGreetingService(){
+     //   return new ConstructorGreetingService();
+    //}
 
     @Bean
     PropertyInjectedGreetingService propertyInjectedGreetingService(){
